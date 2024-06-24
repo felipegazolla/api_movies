@@ -44,6 +44,16 @@ class NotesController {
 
         return response.json("Nota Deletada com sucesso")
     }
+
+    async index(request, response) {
+        const { user_id } = request.query
+
+        const notes = await knex("movie_notes")
+            .where({ user_id })
+            .orderBy("title")
+
+        return response.json(notes)
+    }
 }
 
 module.exports = NotesController
